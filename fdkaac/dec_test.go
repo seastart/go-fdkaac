@@ -23,7 +23,8 @@
 package fdkaac_test
 
 import (
-	"github.com/winlinvip/go-fdkaac/fdkaac"
+	"fmt"
+	"github.com/izern/go-fdkaac/fdkaac"
 	"testing"
 )
 
@@ -52,6 +53,11 @@ func TestRawInit(t *testing.T) {
 	if d.AacSamplesPerFrame() != 0 {
 		t.Error("AacSamplesPerFrame", d.AacSamplesPerFrame(), "is not 0")
 	}
+	fmt.Println("AacSampleRate:", d.AacSampleRate())
+	fmt.Println("Profile:", d.Profile())
+	fmt.Println("AudioObjectType:", d.AudioObjectType())
+	fmt.Println("ChannelConfig:", d.ChannelConfig())
+	fmt.Println("AacSamplesPerFrame:", d.AacSamplesPerFrame())
 }
 
 func TestAdtsInit(t *testing.T) {
@@ -103,6 +109,24 @@ func TestRawDecode(t *testing.T) {
 		t.Error("pcm size invalid, expect 4096, actual is", len(b))
 		return
 	}
+	fmt.Println("SampleRate:", d.SampleRate())
+	fmt.Println("FrameSize:", d.FrameSize())
+	fmt.Println("NumChannels:", d.NumChannels())
+	fmt.Println("AacSampleRate:", d.AacSampleRate())
+	fmt.Println("Profile:", d.Profile())
+	fmt.Println("AudioObjectType:", d.AudioObjectType())
+	fmt.Println("ChannelConfig:", d.ChannelConfig())
+	fmt.Println("Bitrate:", d.Bitrate())
+	fmt.Println("AacSamplesPerFrame:", d.AacSamplesPerFrame())
+	fmt.Println("AacNumChannels:", d.AacNumChannels())
+	fmt.Println("ExtensionAudioObjectType:", d.ExtensionAudioObjectType())
+	fmt.Println("ExtensionSamplingRate:", d.ExtensionSamplingRate())
+	fmt.Println("NumLostAccessUnits:", d.NumLostAccessUnits())
+	fmt.Println("NumTotalBytes:", d.NumTotalBytes())
+	fmt.Println("NumBadBytes:", d.NumBadBytes())
+	fmt.Println("NumTotalAccessUnits:", d.NumTotalAccessUnits())
+	fmt.Println("NumBadAccessUnits:", d.NumBadAccessUnits())
+	fmt.Println("SampleBits:", d.SampleBits())
 }
 
 func TestRawDecode_MultipleFrames(t *testing.T) {
