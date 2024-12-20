@@ -23,8 +23,8 @@
 package fdkaac
 
 /*
-#cgo CFLAGS: -I/usr/lib/fdk-acc-2.0/include/fdk-aac/
-#cgo LDFLAGS: -L/usr/lib/fdk-acc-2.0/lib/ -lfdk-aac -Wl,-rpath=/usr/lib/fdk-acc-2.0/lib/
+#cgo CFLAGS: -I/usr/local/lib/fdk-aac-2.0.0/include/fdk-aac/
+#cgo LDFLAGS: -L/usr/local/lib/fdk-aac-2.0.0/lib/ -lfdk-aac -Wl,-rpath=/usr/local/lib/fdk-aac-2.0.0/lib/
 #include "aacenc_lib.h"
 
 typedef struct {
@@ -240,9 +240,12 @@ func NewAacEncoder() *AacEncoder {
 
 // Initialize the encoder in LC profile.
 // @remark the encoder use sampleRate and channels, user should resample the PCM to fit it,
-//		that is, the channels and sampleRate of PCM should always equals to encoder's.
+//
+//	that is, the channels and sampleRate of PCM should always equals to encoder's.
+//
 // @remark for the fdkaac always use 16bits sample, so the bits of pcm always 16,
-//		which must be: [SHORT PCM] [SHORT PCM] ... ...
+//
+//	which must be: [SHORT PCM] [SHORT PCM] ... ...
 func (v *AacEncoder) InitLc(channels, sampleRate, bitrateBps int) (err error) {
 	v.channels = channels
 
@@ -260,12 +263,15 @@ func (v *AacEncoder) Close() error {
 }
 
 // Encode the pcm to aac, pcm must contains bytes for one aac frame,
-//		that is the bytes must be NbBytesPerFrame().
+//
+//	that is the bytes must be NbBytesPerFrame().
+//
 // @remark fdkaac always use 16bits pcm, so the bits of pcm always 16.
 // @remark user should resample the pcm to fit the encoder, so the channels of pcm equals to encoder's.
 // @remark user should resample the pcm to fit the encoder, so the sampleRate of pcm equals to encoder's.
 // @return when aac is nil, encoded completed(the Flush() return nil also),
-//		because we will flush the encoder automatically to got the last frames.
+//
+//	because we will flush the encoder automatically to got the last frames.
 func (v *AacEncoder) Encode(pcm []byte) (aac []byte, err error) {
 	if frameBytes := 2 * v.channels * v.FrameSize(); frameBytes != len(pcm) {
 		return nil, fmt.Errorf("PCM must be one frame 2*%v*%v=%v, actual=%v",

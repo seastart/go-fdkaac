@@ -3,13 +3,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/izern/go-fdkaac/fdkaac"
-	"io/ioutil"
+	"os"
+
+	"github.com/seastart/go-fdkaac/fdkaac"
 )
 
 func main() {
 
-	bytes, e := ioutil.ReadFile("/root/tmp/flv/9.aac")
+	bytes, e := os.ReadFile("/root/tmp/flv/9.aac")
 	if e != nil {
 		panic(e)
 	}
@@ -47,7 +48,7 @@ func main() {
 	fmt.Println("NumBadAccessUnits:", d.NumBadAccessUnits())
 	fmt.Println("SampleBits:", d.SampleBits())
 	fmt.Println("PCM:", len(pcm))
-	err = ioutil.WriteFile("/root/tmp/autio.pcm", pcm, 0644)
+	err = os.WriteFile("/root/tmp/autio.pcm", pcm, 0644)
 	if err != nil {
 		panic(err)
 	}

@@ -24,8 +24,9 @@ package fdkaac_test
 
 import (
 	"fmt"
-	"github.com/izern/go-fdkaac/fdkaac"
 	"testing"
+
+	"github.com/seastart/go-fdkaac/fdkaac"
 )
 
 func TestRawInit(t *testing.T) {

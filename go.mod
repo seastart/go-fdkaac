@@ -1,3 +1,3 @@
-module github.com/izern/go-fdkaac
+module github.com/seastart/go-fdkaac
 
 go 1.12

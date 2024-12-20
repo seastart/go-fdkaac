@@ -1,29 +1,26 @@
 # go-fdkaac
 
-fork from lib-fdkaac(https://github.com/izern/fdk-aac)
+fork from lib-fdkaac(https://github.com/izern/fdk-aac) (https://github.com/winlinvip/go-fdkaac)
 
 ## Usage
 
 First, get the source code:
 
 ```
-go get -d github.com/izern/go-fdkaac
+go get -d github.com/seastart/go-fdkaac
 ```
 
 Then, compile the fdk-aac:
 
 ```
-cd $GOPATH/src/github.com/izern/go-fdkaac &&
-tar -zxvf fdk-aac-2.0.0.tar.gz && 
-cd fdk-aac-2.0.0/ && ./configure --prefix=/usr/local/fdk-aac-2.0.0 && make && make install &&
-cd ..
+wget https://github.com/seastart/go-fdkaac/raw/refs/heads/master/fdk-aac-2.0.0.tar.gz
+tar -zxvf fdk-aac-2.0.0.tar.gz && cd fdk-aac-2.0.0/ && ./configure --prefix=/usr/local/lib/fdk-aac-2.0.0 && make && make install
 ```
 
 Done, import and use the package:
 
 * [ExampleAacDecoder_RAW](fdkaac/example_test.go#L29), decode the aac frame to PCM samples.
 * [ExampleAacEncoder_LC](fdkaac/example_test.go#L316), encode the PCM samples to aac frame.
-* [audio resample](https://github.com/izern/go-aresample).
 
 There are an example of AAC audio packets in ADTS:
 
@@ -32,7 +29,7 @@ There are an example of AAC audio packets in ADTS:
 To run all examples:
 
 ```
-cd $GOPATH/src/github.com/izern/go-fdkaac && go test ./...
+go test ./...
 ```
 
 Winlin 2016
